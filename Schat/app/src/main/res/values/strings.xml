@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Schat</string>
+    <string name="title_activity_pocetna">Pocetna</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="facebook_app_id">1374702142561730</string>
+    <string name="fb_login_protocol_scheme">1374702142561730</string>
+    <string name="messages">Poruke</string>
+    <string name="friends">Prijatelji</string>
+    <string name="friends_request">Zahtjevi za prijateljstvo</string>
+    <string name="log_out_user">Odjava</string>
+    <string name="title_activity_friends">Friends</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+</resources>
