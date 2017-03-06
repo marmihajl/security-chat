@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -128,9 +130,9 @@ public class Pocetna extends AppCompatActivity
                         }
                     }
                 }).executeAsync();
-
-
-
+        Fragment fragment = new Message();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_pocetna,fragment).commit();
     }
 
     @Override
@@ -169,20 +171,26 @@ public class Pocetna extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+        Fragment fragment = new Message();
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_message) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+            fragment = new Message();
+        } else if (id == R.id.nav_friends) {
+            fragment = new Friends();
 
         } else if (id == R.id.nav_log_out) {
 
             finish();
+            User.loggedIn = false;
             System.exit(0);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_pocetna,fragment).commit();
         return true;
     }
 

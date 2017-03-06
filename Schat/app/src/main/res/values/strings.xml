@@ -14,4 +14,5 @@
     <string name="log_out_user">Odjava</string>
     <string name="title_activity_friends">Friends</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="other">Ostalo</string>
 </resources>

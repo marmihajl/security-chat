@@ -3,20 +3,16 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
+            android:id="@+id/nav_message"
+            android:icon="@drawable/message"
             android:title="@string/messages" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
+            android:id="@+id/nav_friends"
+            android:icon="@drawable/friends"
             android:title="@string/friends" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/friends_request" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/other">
         <menu>
             <item
                 android:id="@+id/nav_log_out"

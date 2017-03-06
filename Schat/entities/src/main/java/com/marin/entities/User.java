@@ -15,6 +15,7 @@ public class User implements Serializable{
     public String gender;
     public String email;
     public String picUrl;
+    public static boolean loggedIn = false;
 
     public User(String id, String name, String link, String gender, String email) {
         this.id = id;
