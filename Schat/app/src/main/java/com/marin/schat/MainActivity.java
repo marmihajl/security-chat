@@ -2,9 +2,15 @@ package com.marin.schat;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -20,6 +26,9 @@ import com.marin.entities.User;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class MainActivity extends AppCompatActivity {
     CallbackManager callbackManager;
 
@@ -33,6 +42,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(
+                    "com.google.shoppingvn", PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.i("KeyHash:",
+                        Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+
+        } catch (NoSuchAlgorithmException e) {
+
+        }
         callbackManager = CallbackManager.Factory.create();
 
         if(!User.loggedIn){
@@ -92,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
             String email = PreferenceManager.getDefaultSharedPreferences(this).getString("email","");
             User u = new User(id,name,link,gender,email);
             Intent i = new Intent(MainActivity.this, Pocetna.class);
-            i.putExtra("user",u);
+            //i.putExtra("user",u);
             startActivity(i);
             finish();
         }

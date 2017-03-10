@@ -1,5 +1,6 @@
 package com.marin.webservice;
 
+import com.marin.entities.ListOfFriend;
 import com.marin.entities.User;
 
 import retrofit2.Call;
@@ -22,5 +23,12 @@ public interface WebService {
         @Field("gender") String gender,
         @Field("email") String email,
         @Field("picUrl") String picUrl
+    );
+
+    @FormUrlEncoded
+    @POST("schat.php")
+    Call<ListOfFriend> findFriends(
+            @Field("request_type") String requestType,
+            @Field("email") String email
     );
 }
