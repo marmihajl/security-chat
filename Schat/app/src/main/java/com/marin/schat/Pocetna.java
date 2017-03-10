@@ -180,7 +180,10 @@ public class Pocetna extends AppCompatActivity
         } else if (id == R.id.nav_friends) {
             fragment = new Friends();
 
-        } else if (id == R.id.nav_log_out) {
+        }else if (id == R.id.nav_friends_request){
+            fragment = new FriendRequest();
+        }
+        else if (id == R.id.nav_log_out) {
 
             finish();
             User.loggedIn = false;

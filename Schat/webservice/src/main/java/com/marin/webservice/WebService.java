@@ -31,4 +31,19 @@ public interface WebService {
             @Field("request_type") String requestType,
             @Field("email") String email
     );
+
+    @FormUrlEncoded
+    @POST("schat.php")
+    Call<ListOfFriend> findRequest(
+            @Field("request_type") String requestType,
+            @Field("email") String email
+    );
+
+    @FormUrlEncoded
+    @POST("schat.php")
+    Call<Boolean> saveRequest(
+            @Field("request_type") String requestType,
+            @Field("fromMail") String fromMail,
+            @Field("toMail") String toMail
+    );
 }

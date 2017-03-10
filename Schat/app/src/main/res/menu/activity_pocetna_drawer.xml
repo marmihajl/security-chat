@@ -10,6 +10,11 @@
             android:id="@+id/nav_friends"
             android:icon="@drawable/friends"
             android:title="@string/friends" />
+
+        <item
+            android:id="@+id/nav_friends_request"
+            android:icon="@drawable/request"
+            android:title="@string/friends_request" />
     </group>
 
     <item android:title="@string/other">

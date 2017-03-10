@@ -1,5 +1,6 @@
 package com.marin.schat;
 
+import android.preference.PreferenceManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,17 +10,20 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.marin.entities.ListOfFriend;
 import com.marin.entities.User;
+import com.marin.webservice.SendDataAndProcessResponseTask;
+import com.marin.webservice.ServiceGenerator;
+import com.marin.webservice.WebService;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Marin Mihajlovic on 8.3.2017..
  */
 
-public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsViewHolder> {
+public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.FriendsViewHolder> {
     private ArrayList<User> friends;
 
     public static class FriendsViewHolder extends RecyclerView.ViewHolder{
@@ -40,7 +44,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
         }
     }
 
-    public FriendsAdapter(ArrayList<User> users){
+    public RequestAdapter(ArrayList<User> users){
         friends = users;
     }
 
@@ -52,11 +56,34 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
     }
 
     @Override
-    public void onBindViewHolder(FriendsViewHolder holder, int position) {
+    public void onBindViewHolder(final FriendsViewHolder holder, int position) {
         holder.friendName.setText(friends.get(position).name);
         holder.friendEmail.setText(friends.get(position).email);
         Picasso.with(holder.mCardView.getContext()).load(friends.get(position).picUrl).into(holder.friendImage);
-        holder.friendButton.setVisibility(View.INVISIBLE);
+        holder.friendButton.setVisibility(View.VISIBLE);
+        holder.friendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                new SendDataAndProcessResponseTask(
+                        ServiceGenerator.createService(WebService.class).saveRequest(
+                                "saveFriend",
+                                FriendRequest.email,
+                                holder.friendName.getText().toString()),
+                        new SendDataAndProcessResponseTask.PostActions(){
+                            @Override
+                            public void onSuccess(Object response) {
+                            }
+
+                            @Override
+                            public void onFailure() {
+
+                            }
+                        }
+                );
+
+            }
+        });
     }
 
     @Override
