@@ -28,6 +28,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
         public TextView friendName;
         public TextView friendEmail;
         public Button friendButton;
+        public Button friendButton2;
 
         public FriendsViewHolder(View v){
             super(v);
@@ -37,6 +38,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
             friendName = (TextView)v.findViewById(R.id.tv_text);
             friendEmail = (TextView)v.findViewById(R.id.tv_blah);
             friendButton = (Button)v.findViewById(R.id.button2);
+            friendButton2 = (Button)v.findViewById(R.id.button3);
         }
     }
 
@@ -57,6 +59,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
         holder.friendEmail.setText(friends.get(position).email);
         Picasso.with(holder.mCardView.getContext()).load(friends.get(position).picUrl).into(holder.friendImage);
         holder.friendButton.setVisibility(View.INVISIBLE);
+        holder.friendButton2.setVisibility(View.INVISIBLE);
     }
 
     @Override

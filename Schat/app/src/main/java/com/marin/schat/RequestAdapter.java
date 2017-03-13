@@ -33,6 +33,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.FriendsV
         public TextView friendName;
         public TextView friendEmail;
         public Button friendButton;
+        public Button friendButton2;
 
         public FriendsViewHolder(View v){
             super(v);
@@ -42,6 +43,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.FriendsV
             friendName = (TextView)v.findViewById(R.id.tv_text);
             friendEmail = (TextView)v.findViewById(R.id.tv_blah);
             friendButton = (Button)v.findViewById(R.id.button2);
+            friendButton2 = (Button)v.findViewById(R.id.button3);
         }
     }
 
@@ -91,9 +93,40 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.FriendsV
                 );
 
 
+            }
+        });
+
+        holder.friendButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                new SendDataAndProcessResponseTask(
+                        ServiceGenerator.createService(WebService.class).saveRequest(
+                                "remove_request",
+                                FriendRequest.email,
+                                mail
+                        ),
+                        new SendDataAndProcessResponseTask.PostActions(){
+                            @Override
+                            public void onSuccess(Object response) {
+                                Object o = response;
+                                FriendRequest.y.friends.remove(position);
+                                FriendRequest.recyclerView.removeViewAt(position);
+                                FriendRequest.adapter.notifyItemRemoved(position);
+                                FriendRequest.adapter.notifyItemRangeChanged(position, FriendRequest.y.friends.size());
+                            }
+
+                            @Override
+                            public void onFailure() {
+
+                            }
+                        }
+                );
+
 
             }
         });
+
     }
 
     @Override

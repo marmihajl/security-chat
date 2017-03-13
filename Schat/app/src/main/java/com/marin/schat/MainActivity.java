@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
             String email = PreferenceManager.getDefaultSharedPreferences(this).getString("email","");
             User u = new User(id,name,link,gender,email);
             Intent i = new Intent(MainActivity.this, Pocetna.class);
-            //i.putExtra("user",u);
+            i.putExtra("user",u);
             startActivity(i);
             finish();
         }
