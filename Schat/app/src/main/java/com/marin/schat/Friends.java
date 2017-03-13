@@ -25,6 +25,7 @@ import java.util.ArrayList;
 
 public class Friends extends Fragment{
     View rootView;
+    public static FriendsAdapter adapter;
 
     public Friends(){
 
@@ -42,7 +43,7 @@ public class Friends extends Fragment{
         rootView =inflater.inflate(R.layout.fragment_friends,container,false);
         String email = PreferenceManager.getDefaultSharedPreferences(rootView.getContext()).getString("email","");
 
-
+        Pocetna.fab.setVisibility(View.VISIBLE);
         new SendDataAndProcessResponseTask(
                 ServiceGenerator.createService(WebService.class).findFriends(
                         "get_friends",
@@ -69,7 +70,7 @@ public class Friends extends Fragment{
     public void display(ListOfFriend x){
         RecyclerView recyclerView = (RecyclerView)rootView.findViewById(R.id.rv_recycler_view);
         recyclerView.setHasFixedSize(true);
-        FriendsAdapter adapter = new FriendsAdapter(x.friends);
+        adapter = new FriendsAdapter(x.friends, this);
         recyclerView.setAdapter(adapter);
 
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());

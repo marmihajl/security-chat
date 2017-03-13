@@ -45,6 +45,7 @@ public class FriendRequest extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_friend_request,container,false);
 
+        Pocetna.fab.setVisibility(View.VISIBLE);
         email = PreferenceManager.getDefaultSharedPreferences(rootView.getContext()).getString("email","");
 
         new SendDataAndProcessResponseTask(
