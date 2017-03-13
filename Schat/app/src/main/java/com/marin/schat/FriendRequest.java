@@ -27,6 +27,9 @@ public class FriendRequest extends Fragment {
 
     public static String email;
     View rootView;
+    public static RequestAdapter adapter;
+    public static ListOfFriend y;
+    public static RecyclerView recyclerView;
 
     public FriendRequest() {
     }
@@ -68,12 +71,14 @@ public class FriendRequest extends Fragment {
     }
 
     public void display(ListOfFriend x){
-        RecyclerView recyclerView = (RecyclerView)rootView.findViewById(R.id.rv_recycler_view2);
+        y = x;
+        recyclerView = (RecyclerView)rootView.findViewById(R.id.rv_recycler_view2);
         recyclerView.setHasFixedSize(true);
-        RequestAdapter adapter = new RequestAdapter(x.friends);
+        adapter = new RequestAdapter(y.friends);
         recyclerView.setAdapter(adapter);
 
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(llm);
     }
+
 }

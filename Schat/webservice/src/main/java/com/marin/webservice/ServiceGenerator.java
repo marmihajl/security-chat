@@ -11,7 +11,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
  */
 
 public class ServiceGenerator {
-    public static final String API_BASE_URL = "http://10.85.10.248/schat/";
+    public static final String API_BASE_URL = "http://192.168.5.121/schat/";
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
             .readTimeout(10, TimeUnit.SECONDS)

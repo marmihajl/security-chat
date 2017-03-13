@@ -1,5 +1,6 @@
 package com.marin.schat;
 
+import android.app.FragmentTransaction;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -56,23 +57,30 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.FriendsV
     }
 
     @Override
-    public void onBindViewHolder(final FriendsViewHolder holder, int position) {
+    public void onBindViewHolder(final FriendsViewHolder holder, final int position) {
         holder.friendName.setText(friends.get(position).name);
         holder.friendEmail.setText(friends.get(position).email);
         Picasso.with(holder.mCardView.getContext()).load(friends.get(position).picUrl).into(holder.friendImage);
         holder.friendButton.setVisibility(View.VISIBLE);
+        final String mail = holder.friendEmail.getText().toString();
         holder.friendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 new SendDataAndProcessResponseTask(
                         ServiceGenerator.createService(WebService.class).saveRequest(
-                                "saveFriend",
+                                "save_friend",
                                 FriendRequest.email,
-                                holder.friendName.getText().toString()),
+                                mail
+                                ),
                         new SendDataAndProcessResponseTask.PostActions(){
                             @Override
                             public void onSuccess(Object response) {
+                                Object o = response;
+                                FriendRequest.y.friends.remove(position);
+                                FriendRequest.recyclerView.removeViewAt(position);
+                                FriendRequest.adapter.notifyItemRemoved(position);
+                                FriendRequest.adapter.notifyItemRangeChanged(position, FriendRequest.y.friends.size());
                             }
 
                             @Override
@@ -81,6 +89,8 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.FriendsV
                             }
                         }
                 );
+
+
 
             }
         });
