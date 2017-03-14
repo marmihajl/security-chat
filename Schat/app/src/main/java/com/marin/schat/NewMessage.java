@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -28,16 +29,19 @@ public class NewMessage extends Fragment {
     public NewMessage(){
     }
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.fragment_send_message,container,false);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         Bundle b = getArguments();
         User user = (User) b.getSerializable("user");
         ImageView pic = (ImageView) v.findViewById(R.id.imageView2);
         TextView name = (TextView)v.findViewById(R.id.textView);
         TextView mail = (TextView)v.findViewById(R.id.textView3);
         EditText editText = (EditText)v.findViewById(R.id.editText);
+
 
         Pocetna.fab.setVisibility(View.INVISIBLE);
 
